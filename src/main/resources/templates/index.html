@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Library Management System</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <h1 class="fw-bolder">Welcome to the Library Management System</h1>
+            <p class="lead fw-normal text-muted">This is a software tool to help library staff manage books, patrons, and book borrowing efficiently.</p>
+            <p class="lead fw-normal text-muted">Use the navigation links to access different features of the system.</p>
+            <ul>
+                <li><a th:href="@{/books}">Manage Books</a></li>
+                <li><a th:href="@{/patrons}">Manage Patrons</a></li>
+                <li><a th:href="@{/borrowings}">Borrowing System</a></li>
+            </ul>
+        </div>
+    </section>
+</main>
+</body>
+</html>

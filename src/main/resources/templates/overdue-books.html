@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Overdue Books</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Overdue Books</h1>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN</th>
+                        <th>Genre</th>
+                        <th>Due Date</th>
+                        <th>Patron</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="overdueBook : ${overdueBooks}">
+                        <td th:text="${overdueBook.book.id}">ID</td>
+                        <td th:text="${overdueBook.book.title}">Title</td>
+                        <td th:text="${overdueBook.book.author}">Author</td>
+                        <td th:text="${overdueBook.book.isbn}">ISBN</td>
+                        <td th:text="${overdueBook.book.genre}">Genre</td>
+                        <td th:text="${overdueBook.dueDate}">Due Date</td>
+                        <td th:text="${overdueBook.patron.email}">Patron Email</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <form th:action="@{/report/notify}" method="get" class="mb-3">
+                <button type="submit" class="btn btn-primary">Notify Patrons</button>
+            </form>
+            <a th:href="@{/books}" class="btn btn-secondary">Back to Book List</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Add Book</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Add Book</h1>
+            </div>
+            <div>
+                <form th:object="${book}" th:action="@{/books/add}" method="post" class="mb-5">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" id="title" name="title" class="form-control" th:field="*{title}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" id="author" name="author" class="form-control" th:field="*{author}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="isbn" class="form-label">ISBN</label>
+                        <input type="text" id="isbn" name="isbn" class="form-control" th:field="*{isbn}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Genre</label>
+                        <select id="genre" name="genre" class="form-select" th:field="*{genre}" required>
+                            <option value="FICTION">Fiction</option>
+                            <option value="NON_FICTION">Non-Fiction</option>
+                            <option value="SCIENCE_FICTION">Science Fiction</option>
+                            <option value="MYSTERY">Mystery</option>
+                            <option value="ROMANCE">Romance</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </form>
+            </div>
+            <a th:href="@{/books}" class="btn btn-secondary">Back to Book List</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

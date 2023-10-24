@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Patron List</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Patron List</h1>
+            </div>
+            <form th:action="@{/patrons/search-patrons}" method="get" class="form-inline mb-5">
+                <input type="text" name="searchText" class="form-control" placeholder="Search by Title or Author">
+                <input type="checkbox" name="member" class="form-check-input" id="memberCheckbox">
+                <label class="form-check-label" for="memberCheckbox">Member Only</label>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Membership Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody id="patronList">
+                <tr th:each="patron : ${patrons}">
+                    <td th:text="${patron.id}">ID</td>
+                    <td th:text="${patron.name}">Name</td>
+                    <td th:text="${patron.email}">Email</td>
+                    <td th:text="${patron.isMember ? 'Member' : 'Non-Member'}">Membership Status</td>
+                    <td
+                            th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}"
+                    ><a th:href="@{/patrons/edit/{id}(id=${patron.id})}" class="btn btn-primary">Edit</a></td>
+                    <td
+                            th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}"
+                    ><a th:href="@{/patrons/delete/{id}(id=${patron.id})}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'') or hasRole(''ROLE_LIBRARIAN'')')}"
+               th:href="@{/patrons/add}" class="btn btn-primary">Add Patron</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

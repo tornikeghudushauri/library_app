@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Reports</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Reports</h1>
+            </div>
+
+            <div class="mb-5">
+                <h2 class="fw-bolder">Transaction History</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patron ID</th>
+                        <th>Book ID</th>
+                        <th>Action</th>
+                        <th>Transaction Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="transaction : ${transactionHistory}">
+                        <td th:text="${transaction.id}">ID</td>
+                        <td th:text="${transaction.patronId}">Patron ID</td>
+                        <td th:text="${transaction.bookId}">Book ID</td>
+                        <td th:text="${transaction.action}">Action</td>
+                        <td th:text="${#temporals.format(transaction.transactionDate, 'dd/MM/yyyy')}">Transaction Date</td>                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</main>
+</body>
+</html>

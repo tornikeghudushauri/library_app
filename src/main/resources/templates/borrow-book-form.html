@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>Borrow Book</title>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Borrow Book</h1>
+            </div>
+            <div>
+                <form th:action="@{/borrowed-books/borrow}" method="post" class="mb-5">
+                    <div class="mb-3">
+                        <label for="patronId" class="form-label">Patron ID</label>
+                        <input type="text" id="patronId" name="patronId" class="form-control" required>
+                    </div>
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <p th:text="${errorMessage}">Error message</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookId" class="form-label">Book ID</label>
+                        <input type="text" id="bookId" name="bookId" class="form-control" required th:value="${bookId}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="borrowingDays" class="form-label">Borrowing Days</label>
+                        <input type="number" id="borrowingDays" name="borrowingDays" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Borrow Book</button>
+                </form>
+            </div>
+            <a th:href="@{/books}" class="btn btn-secondary">Back to Book List</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
